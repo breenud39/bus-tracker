@@ -1,18 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
-const Nav = () => {
+function Nav(props) {
+  const { pages = [], setCurrentPage, currentPage } = props;
+
+  useEffect(() => {
+    document.title = capitalizeFirstLetter(currentPage.name);
+  }, [currentPage]);
+
   return (
-    <ul>
-      <li>Home</li>
-      <li>Trip</li>
-      <li>Planner</li>
-      <li>Routes and Schedules</li>
-      <li>Service</li>
-      <li>Advisors</li>
-      <li>Contact</li>
-    </ul>
+    <nav>
+      <ul className="flex-row">
+        {pages.map((Page) => (
+          <li
+            className={`mx-5 ${currentPage.name === Page.name && "navActive"}`}
+            key={Page.name}
+          >
+            <span onClick={() => setCurrentPage(Page)}>
+              {capitalizeFirstLetter(Page.name)}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
-module.export ={Nav};
+export default Nav;
