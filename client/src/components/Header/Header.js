@@ -12,7 +12,7 @@ const Header = () => {
         <Link className="text-light" to="/">
           <h1 className="m-0">Bus Tracker</h1>
         </Link>
-        <Nav></Nav>
+        
 
         <p className="m-0"></p>
       </div>
