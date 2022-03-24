@@ -23,6 +23,7 @@ const Header = () => {
             <Route path="service-advisories" element={<serviceAdvisories />}></Route> */}
             <Route path="contact" element={<Contact />}></Route>
             <Route path="login" element={<Login />}></Route>
+            <Route exact path="/profile/:username?" component={Profile} />
           </Routes>
           <ul>
             <li>
@@ -45,6 +46,10 @@ const Header = () => {
             </li>
             <li>
               <Link to="/login">Login</Link>
+            </li>
+
+            <li>
+              <Link to="/profile/:username?">{/* Icon */}</Link>
             </li>
           </ul>
         </nav>
