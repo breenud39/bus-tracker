@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSavedBusDataSchema = new Schema({
+const userSavedBusData = new Schema({
   BusNumber: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const userSavedBusDataSchema = new Schema({
   },
 });
 
-const userSavedBusDataSchema = model(
+const userSavedBusDataVar = model(
   "userSavedBusDataSchema",
   userSavedBusDataSchema
 );
