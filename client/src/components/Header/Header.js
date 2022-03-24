@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Nav } from "../Nav/Nav";
 import { Hero } from "../Hero/Hero";
-import { Routes, Router, Link, Outlet } from "react-router";
+import { Routes, Route, Link, Outlet } from "react-router";
 
 const Header = () => {
   const { pages = [Home, About], setCurrentPage, currentPage } = props;
 
   return (
+    // Nav routes
     <div>
       <header>
         <Link className="text-light" to="/">
@@ -16,18 +17,12 @@ const Header = () => {
         <nav>
           <Routes path="/">
             <Route index element={<Home />}></Route>
-            <Route path="trip-planner" element={<TripPlanner />}></Route>
-            <Route
-              path="routes-and-schedules"
-              element={<RoutesAndSchedules />}
-            ></Route>
+            {/* <Route path="trip-planner" element={<TripPlanner />}></Route>
+            <Route path="routes-and-schedules" element={<RoutesAndSchedules />}></Route>
             <Route path="fares-and-passes" element={<FaresAndPasses />}></Route>
-            <Route
-              path="service-advisories"
-              element={<serviceAdvisories />}
-            ></Route>
+            <Route path="service-advisories" element={<serviceAdvisories />}></Route> */}
             <Route path="contact" element={<Contact />}></Route>
-            <Route path="Login" element={<Login />}></Route>
+            <Route path="login" element={<Login />}></Route>
           </Routes>
           <ul>
             <li>
