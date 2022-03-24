@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 const Signup = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -18,11 +19,11 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await login({
+      const { data } = await addUser({
         variables: { ...formState },
       });
 
-      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
