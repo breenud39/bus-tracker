@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 
 // import schema from Book.js
 <<<<<<< HEAD
+<<<<<<< HEAD
 const bookSchema = require('./Book');
+=======
+const buyTicketSchema = require('./buyTicket');
+>>>>>>> 61154fa (add authn and buy ticket)
 =======
 const buyTicketSchema = require('./buyTicket');
 >>>>>>> 61154fa (add authn and buy ticket)
@@ -27,7 +31,11 @@ const userSchema = new Schema(
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
 <<<<<<< HEAD
+<<<<<<< HEAD
     savedBooks: [bookSchema],
+=======
+    savedbuyTicket: [buyTicketSchema],
+>>>>>>> 61154fa (add authn and buy ticket)
 =======
     savedbuyTicket: [buyTicketSchema],
 >>>>>>> 61154fa (add authn and buy ticket)
@@ -57,8 +65,13 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 // when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
 <<<<<<< HEAD
+<<<<<<< HEAD
 userSchema.virtual('bookCount').get(function () {
   return this.savedBooks.length;
+=======
+userSchema.virtual('buyTicketCount').get(function () {
+  return this.savedbuyTicket.length;
+>>>>>>> 61154fa (add authn and buy ticket)
 =======
 userSchema.virtual('buyTicketCount').get(function () {
   return this.savedbuyTicket.length;
@@ -69,6 +82,11 @@ const User = model('User', userSchema);
 
 module.exports = User;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 61154fa (add authn and buy ticket)
 =======
 
 
