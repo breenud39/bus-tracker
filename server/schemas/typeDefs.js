@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 const { gql } = require('apollo-server-express');
+=======
+// importing gql from the Apollo
+const { gql } = require("apollo-server-express");
+>>>>>>> 61154fa (add authn and buy ticket)
 
 const typeDefs = gql`
+<<<<<<< HEAD
   type Category {
     _id: ID
     name: String
@@ -58,3 +64,45 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+=======
+type busRoot {
+  _id: ID
+  name: String
+}
+type buyTicket {
+  _id: ID
+  name: String
+  description: String
+  image: String
+  quantity: Int
+  price: Float
+  busRoot: BusRoot
+}
+type Order {
+  _id: ID
+  purchaseDate: String
+  busTicket: [BusTicket]
+}
+type User {
+  _id: ID
+  name: String
+  email: String
+  orders: [Order]
+}
+type Auth {
+  token: ID
+  user: User
+}
+type Query {
+  busRoots: [BusRoot]
+  buyTickets(busRoot: ID, name: Int): [BusTicket]
+  busTicket(_id: ID!): PbusTicket
+  user: User
+  order(_id: ID!): Order
+  checkout(busTicketss: [ID]!): Checkout
+}
+  
+`;
+// export the typeDefs
+module.exports = typeDefs;
+>>>>>>> 61154fa (add authn and buy ticket)

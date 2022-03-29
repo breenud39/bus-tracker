@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-
+ 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
-  name: {
-    type: String,
+const BusRootsSchema = new Schema({
+  id: {
+    type: Integer,
     required: true,
     trim: true
   },
@@ -19,18 +19,19 @@ const productSchema = new Schema({
     required: true,
     min: 0.99
   },
-  quantity: {
+  destinationTime: {
     type: Number,
     min: 0,
     default: 0
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
-  }
+  arrivalTime: {
+    type: Number,
+    min: 0,
+    default: 0
+  },
+  
 });
 
-const Product = mongoose.model('Product', productSchema);
+const  BusRoots = mongoose.model(' BusRoots', BusRootsSchema);
 
-module.exports = Product;
+module.exports = BusRoots;

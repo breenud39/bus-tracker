@@ -1,4 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
+<<<<<<< HEAD
 const { User, Product, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -45,6 +46,55 @@ const resolvers = {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.products',
           populate: 'category'
+=======
+const { User, buyTicket, busRoot, Order } = require('../models');
+const { signToken } = require('../utils/auth');
+
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+const resolvers = {
+  Query: {
+    categories: async () => {
+      return await busRoot.find();
+    },
+    buyTicket: async (parent, { busRoot, name }) => {
+      const params = {};
+
+      if (busRoot) {
+        params.busRoot = busRoot;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await buyTicket.find(params).populate('busRoot');
+    },
+    buyTicket: async (parent, { _id }) => {
+      return await buyTicket.findById(_id).populate('busRoot');
+    },
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.buyTickets',
+          populate: 'busRoot'
+        });
+
+        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return user;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.buyTickets',
+          populate: 'busRoot'
+>>>>>>> 61154fa (add authn and buy ticket)
         });
 
         return user.orders.id(_id);
@@ -52,6 +102,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+<<<<<<< HEAD
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
@@ -72,12 +123,56 @@ const resolvers = {
           currency: 'usd',
         });
 
+=======
+    // stripe checkout query
+    checkout: async (parent, args, context) => {
+      // parse out referring URL
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ buyTickets: args.buyTickets });
+      const { buyTickets } = await order.populate('buyTicket').execPopulate();
+
+      const line_items = [];
+
+      for (let i = 0; i < buyTickets.length; i++) {
+        // generate product id
+        const buyTicket = await stripe.buyTickets.create({
+          name: buyTickets[i].name,
+          description: buyTickets[i].description,
+          /*
+          Because we have access to the referring URL, 
+          we can also provide an image thumbnail when 
+          creating the product ID.
+          This is to pass the images to the stripe products array
+          */
+          images: [`${url}/images/${buyTickets[i].image}`]
+        });
+
+        // generate price id using the product id
+        const price = await stripe.prices.create({
+            buyTicket: buyTicket.id,
+          // multiple by 100 since price ammount is in cents
+          unit_amount: buyTickets[i].price * 100,
+          currency: 'usd',
+        });
+
+        // add price id to the line items array
+        // why is qty 1 here?
+>>>>>>> 61154fa (add authn and buy ticket)
         line_items.push({
           price: price.id,
           quantity: 1
         });
       }
 
+<<<<<<< HEAD
+=======
+      /*
+      Line itmes array will be used to generate a Stripe
+      checkout session.
+      The checkout session ID is the only data the resolver needs,
+      so we can return it
+      */
+>>>>>>> 61154fa (add authn and buy ticket)
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items,
@@ -85,7 +180,11 @@ const resolvers = {
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${url}/`
       });
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 61154fa (add authn and buy ticket)
       return { session: session.id };
     }
   },
@@ -96,10 +195,17 @@ const resolvers = {
 
       return { token, user };
     },
+<<<<<<< HEAD
     addOrder: async (parent, { products }, context) => {
       console.log(context);
       if (context.user) {
         const order = new Order({ products });
+=======
+    addOrder: async (parent, { buyTickets }, context) => {
+      console.log(context);
+      if (context.user) {
+        const order = new Order({ buyTickets });
+>>>>>>> 61154fa (add authn and buy ticket)
 
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
