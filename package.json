@@ -27,13 +27,32 @@
   "homepage": "https://github.com/breenud39/bus-tracker#readme",
   "dependencies": {
     "apollo-server-express": "^3.6.4",
+    "bcrypt": "^5.0.1",
     "client": "^0.0.1",
+    "color": "^4.2.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
     "graphql": "^16.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.1",
-    "mongoose": "^6.2.7"
+    "mongoose": "^6.2.8",
+    "react-bootstrap": "^2.2.2",
+    "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

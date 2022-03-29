@@ -39,6 +39,14 @@ type Query {
   order(_id: ID!): Order
   checkout(busTicketss: [ID]!): Checkout
 }
+type Mutation {
+  addUser(name: String!, email: String!, password: String!): Auth
+  addOrder(buyTickets: [ID]!): Order
+  updateUser(name: String, email: String, password: String): User
+  updatebuyTicket(_id: ID!, quantity: Int!): BuyTicket
+  login(email: String!, password: String!): Auth
+}
+
   
 `;
 // export the typeDefs
