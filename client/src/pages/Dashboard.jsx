@@ -42,7 +42,7 @@ function Dashboard() {
     <>
       <section className='heading'>
         <h1>Welcome {user && user.name}</h1>
-        <p>buyTicket Dashboard</p>
+        <p>Ticket Buying Dashboard</p>
       </section>
 
       <BuyTicketForm/>
@@ -55,7 +55,7 @@ function Dashboard() {
             ))}
           </div>
         ) : (
-          <h3>You have not set any ticket buying</h3>
+          <h3>You don't have any tickets selected</h3>
         )}
       </section>
     </>
