@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/bustrackerDB', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/bus-tracker', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
-export default mongoose.connection;
+module.exports = mongoose.connection;

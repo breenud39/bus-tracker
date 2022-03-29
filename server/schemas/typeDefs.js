@@ -1,9 +1,45 @@
-const { ApolloServer, gql } = require('apollo-server');
+// importing gql from the Apollo
+const { gql } = require("apollo-server-express");
 
 // The GraphQL schema
 const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
+type busRoot {
+  _id: ID
+  name: String
+}
+type buyTicket {
+  _id: ID
+  name: String
+  description: String
+  image: String
+  quantity: Int
+  price: Float
+  busRoot: BusRoot
+}
+type Order {
+  _id: ID
+  purchaseDate: String
+  busTicket: [BusTicket]
+}
+type User {
+  _id: ID
+  name: String
+  email: String
+  orders: [Order]
+}
+type Auth {
+  token: ID
+  user: User
+}
+type Query {
+  busRoots: [BusRoot]
+  buyTickets(busRoot: ID, name: Int): [BusTicket]
+  busTicket(_id: ID!): PbusTicket
+  user: User
+  order(_id: ID!): Order
+  checkout(busTicketss: [ID]!): Checkout
+}
+  
 `;
+// export the typeDefs
+module.exports = typeDefs;
