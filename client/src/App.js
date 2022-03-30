@@ -1,26 +1,25 @@
+import logo from './logo.svg';
 import './App.css';
-// 1. Import the extendTheme function
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-// import { Box, Flex, Stack, Grid, Wrap, AspectRatio } from "@chakra-ui/layout" --downloaded
 
-// 2. Extend the theme to include custom colors, fonts, etc
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
-
-const theme = extendTheme({ colors })
-
-// 3. Pass the `theme` prop to the `ChakraProvider`
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
-  )
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
