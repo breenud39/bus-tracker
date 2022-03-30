@@ -32,6 +32,6 @@ const BusRootsSchema = new Schema({
   
 });
 
-const  BusRoots = mongoose.model(' BusRoots', BusRootsSchema);
+const  BusRoots = mongoose.model('BusRoots', BusRootsSchema);
 
 module.exports = BusRoots;
