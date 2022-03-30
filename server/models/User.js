@@ -1,55 +1,36 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
+const Order = require('./Order');
 
-// import schema from Book.js
-<<<<<<< HEAD
-<<<<<<< HEAD
-const bookSchema = require('./Book');
-=======
-const buyTicketSchema = require('./buyTicket');
->>>>>>> 61154fa (add authn and buy ticket)
-=======
-const buyTicketSchema = require('./buyTicket');
->>>>>>> 61154fa (add authn and buy ticket)
-
-const userSchema = new Schema(
-  {
-    username: {
+const userSchema = new Schema({
+  
+    name: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, 'Please add a name'],
     },
     email: {
       type: String,
-      required: true,
+      required: [true, 'Please add an email'],
       unique: true,
-      match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Please add a password'],
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
-<<<<<<< HEAD
-<<<<<<< HEAD
-    savedBooks: [bookSchema],
-=======
-    savedbuyTicket: [buyTicketSchema],
->>>>>>> 61154fa (add authn and buy ticket)
-=======
-    savedbuyTicket: [buyTicketSchema],
->>>>>>> 61154fa (add authn and buy ticket)
   },
-  // set this to use virtual below
+  
   {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
+    timestamps: true,
+    orders: [Order.schema]
+  },
+  
+)
 
-// hash user password
-userSchema.pre('save', async function (next) {
+
+// set up pre-save middleware to create password
+userSchema.pre('save', async function(next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
@@ -58,36 +39,11 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-// custom method to compare and validate password for logging in
-userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-<<<<<<< HEAD
-<<<<<<< HEAD
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
-=======
-userSchema.virtual('buyTicketCount').get(function () {
-  return this.savedbuyTicket.length;
->>>>>>> 61154fa (add authn and buy ticket)
-=======
-userSchema.virtual('buyTicketCount').get(function () {
-  return this.savedbuyTicket.length;
->>>>>>> 61154fa (add authn and buy ticket)
-});
-
-const User = model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 61154fa (add authn and buy ticket)
-=======
-
-
->>>>>>> 61154fa (add authn and buy ticket)
