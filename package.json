@@ -4,7 +4,6 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "killservers": "killall -9 node",
     "viewlive": "lsof -Pi | grep LISTEN",
     "start": "node server/server.js",
@@ -26,22 +25,26 @@
   },
   "homepage": "https://github.com/breenud39/bus-tracker#readme",
   "dependencies": {
+    "apollo-server": "^3.6.6",
     "apollo-server-express": "^3.6.4",
     "bcrypt": "^5.0.1",
     "client": "^0.0.1",
     "color": "^4.2.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.1",
-    "mongoose": "^6.2.8",
+    "mongoose": "^6.2.9",
     "react-bootstrap": "^2.2.2",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "stripe": "^8.213.0"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
   },
   "browserslist": {
     "production": [

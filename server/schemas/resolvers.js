@@ -1,15 +1,15 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, buyTicket, busRoot, Order } = require('../models');
+const { User, BuyTicket, BusRoot, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    categories: async () => {
-      return await busRoot.find();
+    busRoots: async () => {
+      return await BusRoot.find();
     },
-    buyTicket: async (parent, { busRoot, name }) => {
+    buyTicket: async (parent, { busRoot, name}) => {
       const params = {};
 
       if (busRoot) {
@@ -22,10 +22,10 @@ const resolvers = {
         };
       }
 
-      return await buyTicket.find(params).populate('busRoot');
+      return await BuyTicket.find(params).populate('busRoot');
     },
     buyTicket: async (parent, { _id }) => {
-      return await buyTicket.findById(_id).populate('busRoot');
+      return await BuyTicket.findById(_id).populate('busRoot');
     },
     user: async (parent, args, context) => {
       if (context.user) {
@@ -58,7 +58,7 @@ const resolvers = {
       // parse out referring URL
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ buyTickets: args.buyTickets });
-      const { buyTickets } = await order.populate('buyTicket').execPopulate();
+      const { buyTickets } = await order.populate('buyTickets').execPopulate();
 
       const line_items = [];
 
@@ -81,7 +81,7 @@ const resolvers = {
             buyTicket: buyTicket.id,
           // multiple by 100 since price ammount is in cents
           unit_amount: buyTickets[i].price * 100,
-          currency: 'usd',
+          currency: 'cad',
         });
 
         // add price id to the line items array
@@ -135,10 +135,10 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateProduct: async (parent, { _id, quantity }) => {
+    updateBuyTicket: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      return await BuyTicket.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
