@@ -18,7 +18,7 @@ function BuyTicketForm() {
     <section className='form'>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
-          <label htmlFor='text'>Buy Ticket</label>
+          <label htmlFor='text'>buy Ticket</label>
           <input
             type='text'
             name='text'

@@ -4,9 +4,8 @@ const { Schema } = mongoose;
 
 const BusRootsSchema = new Schema({
   id: {
-    type: Integer,
-    required: true,
-    trim: true
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId()
   },
   description: {
     type: String

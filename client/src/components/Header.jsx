@@ -1,6 +1,6 @@
 //npm install react-icons
 
-import {FaSignInAlt, FaSignOutAlt, FaUser, FaHistory, FaBusAlt, AiFillDashboard} from 
+import {FaSignInAlt, FaSignOutAlt, FaUser} from 
 'react-icons/fa'
 import {Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch}from 'react-redux'
@@ -32,21 +32,6 @@ function Header () {
                </li>
               ) : (
               <>
-                <li>
-                    <Link to="/dashboard">
-                        <AiFillDashboard/> Dashboard
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/tripPlanner">
-                        <FaBusAlt/> Trip Planner
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/orderHistory">
-                        <FaHistory/> Ticket History
-                    </Link>
-                </li>
                 <li>
                     <Link to = '/login'>
                         <FaSignInAlt/>Login
