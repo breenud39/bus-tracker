@@ -3,18 +3,18 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const buyTicketSchema = new Schema({
-    buyTickeDate: {
+    buyTicketDate: {
     type: Date,
     default: Date.now
   },
   busRoot: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'busRoot'
+      ref: 'BusRoot'
     }
   ]
 });
 
-const buyTicke = mongoose.model('buyTicke',buyTicketSchema);
+const buyTicket = mongoose.model('BuyTicket',buyTicketSchema);
 
-module.exports = buyTicke;
+module.exports = buyTicket;
