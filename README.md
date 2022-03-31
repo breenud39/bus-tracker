@@ -50,4 +50,6 @@ https://opensource.org/licenses/MIT
 ## Credits
 :family:
 Mekonnen, Evangelos, Farjad, Avneet, Ethan
+
 ## Live URL
+https://bus-tracker-application.herokuapp.com/
