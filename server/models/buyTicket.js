@@ -15,6 +15,6 @@ const buyTicketSchema = new Schema({
   ]
 });
 
-const buyTicket = mongoose.model('BuyTicket',buyTicketSchema);
+const BuyTicket = mongoose.model('BuyTicket',buyTicketSchema);
 
-module.exports = buyTicket;
+module.exports = BuyTicket;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
  
 const { Schema } = mongoose;
 
-const BusRootsSchema = new Schema({
+const busRootsSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId()
@@ -31,6 +31,6 @@ const BusRootsSchema = new Schema({
   
 });
 
-const  BusRoots = mongoose.model('BusRoots', BusRootsSchema);
+const  BusRoots = mongoose.model('BusRoots', busRootsSchema);
 
 module.exports = BusRoots;
