@@ -2,6 +2,7 @@
 //rfce to have the code snipshoot ** starting code **
 
 // import React from 'react'
+import React from 'react';
 import {useState, useEffect} from 'react'
 import {FaSignInAlt} from 'react-icons/fa'
 import {useSelector, useDispatch} from 'react-redux'

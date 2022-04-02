@@ -1,6 +1,6 @@
 //ES7+ React/Redux/React-Native snippets
 //rfce to have the code snipshoot ** starting code **
-
+import React from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
